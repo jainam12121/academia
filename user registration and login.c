@@ -1,6 +1,40 @@
 #include <stdio.h> 
 #include <string.h> 
 #define MAX_USERS 10 // Maximum number of users 
+= 0) {
+            return true; // Login successful
+        }
+    }
+    return false; // Login failed
+}
+
+// Function to simulate user registration
+void registerUser(struct User users[], int* numUsers, char username[], char password[]) {
+    if (*numUsers < MAX_USERS) {
+        struct User newUser;
+        strcpy(newUser.username, username);
+        // Hash and salt the password before storing it
+        bcrypt_newhash(password, 12, newUser.password, sizeof(newUser.password));
+        users[(*numUsers)++] = newUser;
+        printf("Registration Successful!\n");
+    } else {
+        printf("User limit reached. Registration failed.\n");
+    }
+}
+
+// ... (other module functions)
+
+int main() {
+    struct User users[MAX_USERS];
+    int numUsers = 0;
+
+    // Initialize a bcrypt work factor (adjust as needed)
+    bcrypt_gensalt(12);
+
+    // ... (menu and user interactions)
+
+    return 0;
+}
 struct User { 
     char username[50]; 
     char password[50]; 
